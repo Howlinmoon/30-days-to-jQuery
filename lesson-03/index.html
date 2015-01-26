@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset=utf-8>
+	<title>JQuery 30 days Tutorial lesson 03</title>
+	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+	
+	<!-- Set a default color for list items - black -->
+	<style>
+		li { color: black;}
+		.container { color: green;}
+		<!-- .emphasis { color: green} -->
+		
+	</style>
+	
+</head>
+
+<body>
+
+<div class="container">
+	<h1> Welcome to my Website</h1>
+	<p>
+		Blah Blah Blah Blah Blah Blah Blah Blah
+		Line2 Line2 Line2 Line2 Line 2 Line 2 Line 2
+		Meh Meh Meh Meh Meh Meh Meh Meh Meh
+	</p>
+
+	<ul class="emphasis">
+		<li>Item 1</li>
+		<li>Item 2</li>
+		<li>Item 3</li>
+		<li>Item 4</li>
+		<li>Item 5</li>
+		<li>Item 6</li>
+		<li>
+			<ul>
+				<li>This is a nested item</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+<script>
+	// This will not effect the nested item, it remains black
+	// $('ul.emphasis')	.children('li').css('color', 'red');
+
+	// This will effect ALL li items - including the nested item
+	// $('ul.emphasis')	.find('li').css('color', 'blue');
+
+	// The css method which may not work in older browsers
+	// $('ul.emphasis')	.find('li:nth-child(1)').addClass('emphasis');
+	
+	// The Javascript method - which works in older browsers
+	// $('ul.emphasis')	.children('li:first').addClass('emphasis');
+	
+	// Using jQuery's "first()" method"
+	//$('ul.emphasis')	.children('li').first().addClass('emphasis');
+	
+	// This overwrites the text for the second li item 'hello 2' with the following text
+	$('ul.emphasis').children('li:nth-child(2)').text('added with jQuery');
+
+	// This overwrites the text for the first li item (base 0)  'hello 1' with the following text
+	$('ul.emphasis').children('li').eq(0).text('added with jQuery via equ(0)');
+
+	// This demonstrates chaining, by finding the 3rd item, and next'ing to the 4th
+	$('ul.emphasis').children('li').eq(2).next().text("added with jQuery by pointing to 3, and next'ing to 4");
+
+	// This demonstrates chaining, by finding the 4th item, and prev'ing to the 3rd
+	$('ul.emphasis').children('li').eq(3).prev().text("added with jQuery by pointing to 4, and prev'ing to 3");
+	
+	// parenting
+	$('li').parent().removeClass('emphasis');
+	
+	// parent refers to the items direct parent, parents refers to the items parents, grandparents, etc
+	// $('li').parents('div.container').removeClass('container');
+	
+	// closest... exact same effect as parents in this case, but actually is not
+	// closest goes until it makes a match and stops - even if there are other matches further up.
+	$('li').closest('div.container').removeClass('container');
+	
+</script>
+
+</body>
+</html>
