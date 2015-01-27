@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset=utf-8>
+	<title>JQuery 30 days Tutorial lesson 05</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- Definition List,  Terms, Details -->
+
+<dl>
+	<dt>What are your hours?</dt>
+	<dd>We are open 24/7</dd>
+	<dt>What are your hours?</dt>
+	<dd>We are open 24/7</dd>
+	<dt>What are your hours?</dt>
+	<dd>We are open 24/7</dd>
+	<dt>What are your hours?</dt>
+	<dd>We are open 24/7</dd>
+	<dt>What are your hours?</dt>
+	<dd>We are open 24/7</dd>
+</dl>
+
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+<script>
+	(function () {
+		var dd = $('dd');
+		//console.log(dd);
+		// various methods to hide the details
+		
+		// try to hide all but the first definition details
+		
+		dd.filter(':nth-child(n+4)').hide();
+		// this counts ALL the elements in the DL - including the dt's and dd's
+		// so element 4 is the 2nd dd
+		
+
+/* 		dd.toggle();
+		dd.hide();
+		dd.show();
+		dd.fadeIn();
+		dd.slideDown();
+ */
+ 
+ 		// show hovered over details - only attaching the listener to a single parent - instead of all of the children
+ 		$('dl').on('mouseenter', 'dt',  function() {
+ 
+ 			// original
+// 			$(this).next().siblings('dd').hide();
+// 			$(this).next().show();
+
+ 			// cleaned up
+			$(this)
+ 				.next()
+ 					.slideDown(200)
+ 						.siblings('dd')
+ 							.slideUp(200);
+		
+ 		
+ 		
+ 		})
+ 
+ 
+	})();
+
+</script>
+
+
+</body>
+</html>
