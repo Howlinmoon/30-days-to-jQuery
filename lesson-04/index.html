@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset=utf-8>
+	<title>JQuery 30 days Tutorial lesson 04</title>
+	<link rel="stylesheet" href="day.css">
+</head>
+
+<body>
+
+<h1>My Website</h1>
+
+<button data-file="day">Day</button>
+<button data-file="night">Night</button>
+
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+<script>
+
+// self invoking function - thus the trailing ()
+(function() {
+
+	//optimize jQuery
+	var link = $('link');
+
+	// convenience version using an anonymous non self invoking function
+	$('button').click(function() {
+		console.log("A button was clicked");
+		// normal non-jQuery output
+		// console.log(this);
+		// jQuery enhanced output
+		// console.log($(this));
+		// rewrite the text of the button
+		// $(this).text('new button text');
+		
+		// find the link item, adjust the "href" attribute to point to the "night.css" style sheet
+		//$('link').attr('href', 'night.css');
+		
+		// Determine which button was clicked based on the text
+		//var stylesheet = $(this).text().toLowerCase();
+		//console.log("Text of the button click: "+stylesheet);
+		// set the style sheet based on the text of the clicked button
+		//$('link').attr('href', stylesheet + '.css');
+		
+		// Method two accesses the custom data- element we defined in our button
+		//var stylesheet = $(this).data('file');
+		//console.log("The custom data-file value is: "+stylesheet);
+		// and again - adjust the css
+		//$('link').attr('href', stylesheet + '.css');
+		
+		// this uses the optimized link var above
+		// caching 'this' for use later
+		var $this = $(this),
+			stylesheet = $this.data('file');
+		link.attr('href', stylesheet + '.css');
+		
+		// using the attribute 'disabled' to prevent redundant presses
+		// the first jQuery removes disabled from ALL buttons
+		// the second one disables the current button
+		$this
+			.siblings('button')
+			.removeAttr('disabled');
+		
+		$this.attr('disabled','disabled');
+		
+		
+	});
+})();
+
+
+
+</script>
+
+
+</body>
+</html>
