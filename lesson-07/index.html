@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset=utf-8>
+	<title>JQuery 30 days Tutorial lesson 07</title>
+	<link rel="stylesheet" href="style.css">
+	<style>
+		article {
+			width: 600px;
+			margin: auto;
+		}
+	
+		blockquote.co {
+			float: right;
+			background: #e3e3e3;
+			font-size: 2em;
+			width: 35%;
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body>
+
+<article>
+	<h1> My Awesome Post</h1>
+	<p>
+		this is just a bunch of words pretending to be a blog post.  Cool - huh?
+		This is actually the 2nd line, but it wraps to the 1rst
+	</p>
+	<p>
+		this is just a bunch of words pretending to be a blog post.  Cool - huh?
+		This is actually the 2nd line, but it wraps to the 1rst
+	</p>
+	<p>
+		this is just a bunch of words pretending to be a blog post.  Cool - huh?
+		This is actually the 2nd line, but it wraps to the 1rst
+	</p>
+	
+	<p>
+		<span class=co>Here comes another line of nonsense,</span> sorta reminds me of the political
+		noise spouted by some of our elected leaders.
+		Of course, dear reader, I am talking about the party your disagree with the most.
+		Of course, dear reader, I am talking about the party your disagree with the most.
+		Of course, dear reader, I am talking about the party your disagree with the most.
+		Of course, dear reader, I am talking about the party your disagree with the most.
+		Of course, dear reader, I am talking about the party your disagree with the most.
+	</p>
+</article>
+
+
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+
+<script>
+(function() {
+	$('article').append('(bottom) Hello from the JavaScript<br />');
+	$('article').prepend('(top) Hello from the JavaScript<br />');
+
+	$('h1').after('(after H1) Hello from the JavaScript<br />');
+
+	$('p').first().before('(before first p) Hello from the JavaScript<br />');
+
+	// adding html code the old (sloppy) way
+	//$('<h2>Appended H2 from Javascript</h2>').appendTo('article');
+	
+	// adding content the new - Javascript way (appendTo or prependTo)
+	$('<h2></h2>', {
+		text: 'Hello - this is the new method',
+		class: 'myClass'
+	}).appendTo('article');
+
+	// Inserting after the H1 tag
+	$('<h2></h2>', {
+		text: 'Inserted After the H1 tag: Hello - this is the new method',
+		class: 'myClass'
+	}).insertAfter('h1');
+
+	// Inserting after the H1 tag
+	$('<h2></h2>', {
+		text: 'Inserted before the 3rd p tag: Hello - this is the new method',
+		class: 'myClass'
+	}).insertBefore('p:nth-child(3)');
+
+	// Moving H1 down - appending something that already exists, MOVES it.
+	//$('h1').appendTo('article');
+
+	// this appends the h1 tag after each <p>...
+	// $('p').after( $('h1') );
+
+	// this does what we want
+	// $('p').eq(0).after( $('h1') );
+
+	// another method
+	$('p').eq(0).after( function() {
+		return $(this).prev(); 
+	});
+	
+	// playing with the call out
+	var co = $('span.co').each(function () {
+		var $this = $(this);
+		$('<blockquote></blockquote>', {
+			class: 'co',
+			text: $this.text()
+		}).prependTo($this.closest('p'));
+	});
+	
+	
+})();
+
+
+</script>
+
+
+</body>
+</html>
